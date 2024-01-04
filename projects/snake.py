@@ -1,25 +1,28 @@
-try:
-    import pygame
-except:
-    print("[INFO] Pygame not found, installing with user privileges")
-    import os
-    os.system("pip install pygame --user")
-    import pygame
+import os
+for package in ["pygame", "tempfile", "winsound"]:
+    try:
+        globals()[package] = __import__(package)
+    except:
+        print(f"[INFO] {package} not found, installing with user privileges")
+        os.system("pip install {package} --user")
+        import pygame
 import tkinter as tk
-from pygame import mixer
-import math, os, random, requests
-mixer.init(frequency=22050)
+import math, os, random
+import time, requests, winsound
+import tempfile, threading
+
 try:
     for sound in ["dash", "eat", "loose", "stopdash"]:
-        globals()[f"_audio{sound}"] = mixer.Sound(requests.get(f"https://github.com/Bin-Ban/sounds/raw/main/{sound}.wav").content)
-    wifion = True
+        globals()[f"_audio{sound}"] = requests.get(f"https://github.com/Bin-Ban/sounds/raw/main/{sound}.wav").content
+        wifion = True
     soundplayeron = True
-except:
-    wifion=False
-os.environ['SDL_VIDEO_WINDOW_POS']='0,30'
+except Exception as e:
+    print(e)
+    wifion = False
+os.environ['SDL_VIDEO_WINDOW_POS'] = '0,30'
 # Window dimensions
 win_width = 800
-win_height = 600
+win_height = 800
 reverseddirections = {"UP": "DOWN", "DOWN": "UP", "LEFT": "RIGHT", "RIGHT": "LEFT"}
 # Colors
 white = (255, 255, 255)
@@ -59,17 +62,33 @@ game_over_text = font.render('Game Over', True, red)
 
 def playsound(soname):
     if wifion:
-        globals()[f"_audio{soname}"].play()
+        def play_sound():
+            # Create a temporary file
+            fd, path = tempfile.mkstemp(suffix=".wav")
+            try:
+                # Write the byte data to the file
+                with os.fdopen(fd, 'wb') as tmp:
+                    tmp.write(globals()[f"_audio{soname}"])
+                # Play the sound
+                winsound.PlaySound(path, winsound.SND_FILENAME)
+            finally:
+                # Delete the temporary file
+                os.remove(path)
+
+        # Start a new thread to play the sound
+        threading.Thread(target=play_sound).start()
+
 
 def our_snake(snake_pos, dash):
-    colors = [(0, 255, 0), (0, 123, 0)] if not dash else [(0, 0, 255),(0, 0, 123)]
+    colors = [(0, 255, 0), (0, 123, 0)] if not dash else [(0, 0, 255), (0, 0, 123)]
     count = 0
     for pos in snake_pos:
         count += 1
         if count == 1:
             pygame.draw.rect(screen, (255, 255, 255), pygame.Rect(pos[0], pos[1], 10, 10))
             continue
-        pygame.draw.rect(screen, colors[0] if count %2 == 0 else colors[1], pygame.Rect(pos[0], pos[1], 10, 10))
+        pygame.draw.rect(screen, colors[0] if count % 2 == 0 else colors[1], pygame.Rect(pos[0], pos[1], 10, 10))
+
 
 def gameLoop():
     global win_width, win_height, snake_speed
@@ -112,7 +131,7 @@ def gameLoop():
                         zenbox.select()
                     zenbox.pack()
                     borderbox = tk.Checkbutton(text="Tping borders", font=("Helvica", 50),
-                                            command=lambda: togglevar("tpborder"))
+                                               command=lambda: togglevar("tpborder"))
                     borderbox.pack()
                     if tpborder:
                         borderbox.select()
@@ -149,7 +168,9 @@ def gameLoop():
             food_spawn = False
         if food_pos[1] > win_height:
             food_spawn = False
-        if math.isclose(snake_pos[0][0], food_pos[0], abs_tol=25 if dashon else 10) and math.isclose(snake_pos[0][1], food_pos[1],abs_tol=25 if dashon else 10):
+        if math.isclose(snake_pos[0][0], food_pos[0], abs_tol=25 if dashon else 10) and math.isclose(snake_pos[0][1],
+                                                                                                     food_pos[1],
+                                                                                                     abs_tol=25 if dashon else 10):
             score += 1
             snake_speed += 5 if dashon else 1
             pastspeed += 1
@@ -170,25 +191,26 @@ def gameLoop():
             if snake_pos[0][0] >= win_width:
                 snake_pos[0][0] = 0
                 if borderchange:
-                    pygame.display.set_mode((win_width+score, win_height), flags=pygame.RESIZABLE)
+                    pygame.display.set_mode((win_width + score, win_height))
                     win_width = pygame.display.get_window_size()[0]
             if snake_pos[0][0] < 0:
-                snake_pos[0][0] = win_width-(score if borderchange else 0)
+                snake_pos[0][0] = win_width - (score if borderchange else 0)
                 if borderchange:
-                    pygame.display.set_mode((win_width-score, win_height), flags=pygame.RESIZABLE)
+                    pygame.display.set_mode((win_width - score, win_height))
                     win_width = pygame.display.get_window_size()[0]
             if snake_pos[0][1] >= win_height:
                 snake_pos[0][1] = 0
                 if borderchange:
-                    pygame.display.set_mode((win_width, win_height+score), flags=pygame.RESIZABLE)
+                    pygame.display.set_mode((win_width, win_height + score))
                     win_height = pygame.display.get_window_size()[1]
             if snake_pos[0][1] < 0:
-                snake_pos[0][1] = win_height-(score if borderchange else 0)
+                snake_pos[0][1] = win_height - (score if borderchange else 0)
                 if borderchange:
-                    pygame.display.set_mode((win_width, win_height-score), flags=pygame.RESIZABLE)
+                    pygame.display.set_mode((win_width, win_height - score))
                     win_height = pygame.display.get_window_size()[1]
         else:
-            if snake_pos[0][0] >= win_width or snake_pos[0][0] < 0 or snake_pos[0][1] >= win_height or snake_pos[0][1] < 0:
+            if snake_pos[0][0] >= win_width or snake_pos[0][0] < 0 or snake_pos[0][1] >= win_height or snake_pos[0][
+                1] < 0:
                 game_over = True
                 break
 
@@ -204,15 +226,17 @@ def gameLoop():
     textRect.center = (win_width // 2 - 16, win_height // 2 - 16)
     screen.blit(game_over_text, textRect)
     pygame.display.update()
-    globals()["_audioloose"].play()
-    while mixer.get_busy():
-        pass
+    playsound("loose")
+    time.sleep(2)
     pygame.quit()
     quit()
+
+
 def togglevar(vari):
     if globals()[vari]:
         globals()[vari] = False
     else:
         globals()[vari] = True
+
 
 gameLoop()
