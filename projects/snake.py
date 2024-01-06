@@ -1,5 +1,5 @@
 import os
-for package in ["pygame", "tempfile", "winsound"]:
+for package in ["pygame", "tempfile", "winsound", "requests"]:
     try:
         globals()[package] = __import__(package)
     except:
