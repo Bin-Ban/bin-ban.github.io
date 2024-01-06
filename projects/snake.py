@@ -125,6 +125,7 @@ def gameLoop():
                     dashon = True
                 if event.key == pygame.K_ESCAPE:
                     root = tk.Tk()
+                    tk.Label(text=f"Your score:\n{score}", font=("Helvica", 25)).pack()
                     zenbox = tk.Checkbutton(text="Zen mode", font=("Helvica", 50),
                                             command=lambda: togglevar("zen"))
                     if zen:
@@ -140,6 +141,7 @@ def gameLoop():
                         if borderchange:
                             changebox.select()
                         changebox.pack()
+                    root.bind('<Escape>', lambda x:root.destroy())
                     root.mainloop()
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_SPACE:
