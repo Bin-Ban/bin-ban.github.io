@@ -58,39 +58,39 @@
     <div class="row" style="border: solid 15px #333333; border-radius: 10px; padding:20; margin:20px; background-color: #E0E8F0">
         <div class="column" style="background-color:#005a9e;" id="Monday">
           <h2>Lunes</h2>
-          <pre>frances
-lengua
-coding
+          <pre><span id="11">frances</span>
+<span id="12">lengua</span>
+<span id="13">coding</span>
       
-mates
-fisica
+<span id="14">mates</span>
+<span id="15">fisica</span>
       
-historia
-ingles</pre>
+<span id="16">historia</span>
+<span id="17">ingles</span></pre>
         </div>
         <div class="column" style="background-color:#0074c6;" id="Tuesday">
           <h2>Martes</h2>
-          <pre>frances
-biologia
-ingles
+          <pre><span id="21">frances</span>
+<span id="22">biologia</span>
+<span id="23">ExamPrep</span>
       
-ingles
-mates
+<span id="24">ingles</span>
+<span id="25">mates</span>
       
-economia
-lengua</pre>
+<span id="26">economia</span>
+<span id="27">lengua</span></pre>
         </div>
         <div class="column" style="background-color:#0092ff;" id="Wednesday">
           <h2>Miercoles</h2>
-          <pre>PE
-investigacion
-lengua
+          <pre><span id="31">PE</span>
+<span id="32">investigacion</span>
+<span id="33">lengua</span>
       
-computers
-ingles
+<span id="34">computers</span>
+<span id="35">ingles</span>
       
-frances
-biologia</pre>
+<span id="36">frances</span>
+<span id="37">biologia</span></pre>
         </div>
         <div class="column" style="background-color:#74b3ff;" id="Thursday">
           <h2>Jueves</h2>
@@ -123,5 +123,6 @@ ingles</pre>
 <script type="text/javascript">
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 const d = new Date();
+console.log(d.getDay())
 document.getElementById(weekday[d.getDay()]).style.backgroundColor='ff6600';
     </script>
