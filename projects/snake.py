@@ -1,11 +1,11 @@
 import os
-for package in ["pygame", "tempfile", "winsound", "requests"]:
+for package in ["pygame", "tempfile", "requests"]:
     try:
         globals()[package] = __import__(package)
     except:
         print(f"[INFO] {package} not found, installing with user privileges")
-        os.system("pip install {package} --user")
-        import pygame
+        os.system(f"pip install {package} --user")
+        globals()[package] = __import__(package)
 import tkinter as tk
 import math, os, random
 import time, requests, winsound
