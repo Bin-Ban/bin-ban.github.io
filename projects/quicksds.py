@@ -2,12 +2,13 @@ import ctypes
 import os
 try:
   import tkinter as tk
-  import keyboard
   import pyautogui
   import time
   from datetime import datetime
+  import keyboard
 except:
   os.system("pip install pyautogui keyboard --user")
+  import keyboard
 
 
 def DSDA():
