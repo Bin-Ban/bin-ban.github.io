@@ -1,53 +1,9 @@
 <head>
-    <title>Horario</title>
+    <title>SCHL horario</title>
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <style>
-        * {
-          box-sizing: border-box;
-        }
-        
-        .row {
-          display: flex;
-        }
-        
-        /* Create two equal columns that sits next to each other */
-        .column {
-          flex: 50%;
-          padding: 10px;
-          text-align: center;
-          font-size:30px /* Should be removed. Only for demonstration */
-        }
-          body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-          }
-        
-          .topnav {
-            overflow: hidden;
-            background-color: #0077B6;
-          }
-        
-          .topnav a {
-            float: left;
-            color: #f2f2f2;
-            text-align: center;
-            padding: 14px 16px;
-            text-decoration: none;
-            font-size: 17px;
-          }
-        
-          .topnav a:hover {
-            background-color: #00A0D6;
-            color: black;
-          }
-        
-          .topnav a.active {
-            background-color: #04AA6D;
-            color: white;
-          }
-        </style>
+    <link rel="stylesheet" href="../main.css">
 </head>
-<body style="background-color: #F0F0F0">
+<body>
   <div class="topnav">
     <a href="../index.html">Home</a>
     <a class="active" href="#">Horario</a>
@@ -55,9 +11,8 @@
     <a href="menu.html">Menu</a>
   </div>
 
-<div style="background-color: #E0E8F0;">
     <div class="row" style="border: solid 15px #333333; border-radius: 10px; margin:20px; background-color: #E0E8F0">
-        <div class="column" style="background-color:#005a9e;" id="Monday">
+        <div class="column" style="background-color:#2d9e00;" id="Monday">
           <h2>Lunes</h2>
           <pre><span id="11">frances</span>
 <span id="12">lengua</span>
@@ -69,7 +24,7 @@
 <span id="16">historia</span>
 <span id="17">ingles</span></pre>
         </div>
-        <div class="column" style="background-color:#0074c6;" id="Tuesday">
+        <div class="column" style="background-color:#3ac62d;" id="Tuesday">
           <h2>Martes</h2>
           <pre><span id="21">frances</span>
 <span id="22">biologia</span>
@@ -81,7 +36,7 @@
 <span id="26">economia</span>
 <span id="27">lengua</span></pre>
         </div>
-        <div class="column" style="background-color:#0092ff;" id="Wednesday">
+        <div class="column" style="background-color:#2dff2d;" id="Wednesday">
           <h2>Miercoles</h2>
           <pre><span id="31">PE</span>
 <span id="32">investigacion</span>
@@ -93,7 +48,7 @@
 <span id="36">frances</span>
 <span id="37">biologia</span></pre>
         </div>
-        <div class="column" style="background-color:#74b3ff;" id="Thursday">
+        <div class="column" style="background-color:#78ff42;" id="Thursday">
           <h2>Jueves</h2>
           <pre><span id="41">lengua</span>
 <span id="42">biologia</span>
@@ -105,7 +60,7 @@
 <span id="46">examprep</span>
 <span id="47">historia</span></pre>
         </div>
-        <div class="column" style="background-color:#c2dfff;" id="Friday">
+        <div class="column" style="background-color:#a1ff6a;" id="Friday">
           <h2>Viernes</h2>
           <pre><span id="51">PE</span>
 <span id="52">computers</span>
@@ -118,12 +73,11 @@
 <span id="57">ingles</span></pre>
         </div>
       </div>
-</div>
 
 </body>
 <script type="text/javascript">
     const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
     const times = []
-    const d = new Date();
-document.getElementById(weekday[d.getDay()]).style.backgroundColor='ff6600';
+    const d = new Date()
+    document.getElementById(weekday[d.getDay()]).style.backgroundColor='ff6600';
     </script>
