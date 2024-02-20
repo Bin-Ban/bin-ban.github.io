@@ -3,18 +3,46 @@
     <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="../main.css">
 </head>
+<script>
+  const toggled = [["gui1", false]] 
+  function task1toggle(){
+    console.log("Clicked")
+    if(toggled[0][1]){
+      document.getElementById("gui1").innerHTML="";
+      toggled[0][1] = false
+    }
+    else{
+      document.getElementById("gui1").innerHTML=`import tkinter as tk
+root = tk.Tk()
+root.title("Add two numbers")
+tk.Label(text="Enter a number").pack()
+num1 = tk.Entry()
+num1.pack()
+tk.Label(text="Enter another number").pack()
+num2 = tk.Entry()
+num2.pack()
+btn = tk.Button(text="Add numbers")
+btn.pack()
+root.geometry("720x270")
+root.mainloop()
+#cambiar nombres de las variables y añadir espacios para evitar que se de cuenta. Y BORRA ESTO`
+      toggled[0][1] = true
+    }
+  }
+</script>
 <body>
   <div class="topnav">
     <a href="../index.html">Home</a>
     <a href="horario.html">Horario</a>
-    <a class="active" href="#">Projects</a>
+    <a href="projects.html">Projects</a>
     <a href="menu.html">Menu</a>
+    <a class="active" href="#">Coding</a>
   </div>
 
-<div style="border: solid 15px #ffffff; border-radius: 10px; padding:20; margin:20px">
+<div style="border: solid 15px #ffffff; border-radius: 10px; padding:20; margin:20px; width: auto;">
 <center style="color: #ffffff;font-size:25px;"><h1>Coding answers</h1>
-  <button class="button button1" type="button"></button>
-  <h2 id="gui1"></h2>
+  <button class="button button1" type="button" onclick="task1toggle()">Task 1 gui</button>
+  <pre id="gui1" style="font-family: Arial, Helvetica, sans-serif; border: solid 5px #ffffff; border-radius: 10px; margin:20px; padding: 20px; width:fit-content"></pre>
 </center>
 </div>
 </body>

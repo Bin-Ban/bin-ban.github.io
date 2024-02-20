@@ -49,11 +49,12 @@
     }
     .button1 {
       background-color: white;
+      font-size: 25px;
       color: black;
-      border: 2px solid #04AA6D;
+      border: 7px solid #00462c;
     }
     
     .button1:hover {
-      background-color: #04AA6D;
+      background-color: #00462c;
       color: white;
     }
