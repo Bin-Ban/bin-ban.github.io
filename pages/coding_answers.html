@@ -4,15 +4,17 @@
     <link rel="stylesheet" href="../main.css">
 </head>
 <script>
-  const toggled = [["gui1", false]] 
-  function task1toggle(){
-    console.log("Clicked")
-    if(toggled[0][1]){
-      document.getElementById("gui1").innerHTML="";
-      toggled[0][1] = false
+  const toggled = [["gui1", false], ["test", false]] 
+  function toggle(id, index){
+    var elmt = document.getElementById(id)
+    if(toggled[index][1]){
+      elmt.innerHTML="";
+      elmt.style.visibility = "hidden"
+      toggled[index][1] = false
     }
     else{
-      document.getElementById("gui1").innerHTML=`import tkinter as tk
+      elmt.style.visibility = "visible"
+      elmt.innerHTML=`import tkinter as tk
 root = tk.Tk()
 root.title("Add two numbers")
 tk.Label(text="Enter a number").pack()
@@ -25,7 +27,8 @@ btn = tk.Button(text="Add numbers")
 btn.pack()
 root.geometry("720x270")
 root.mainloop()
-#cambiar nombres de las variables y añadir espacios para evitar que se de cuenta. Y BORRA ESTO`
+#cambiar nombres de las variables 
+#añadir espacios para evitar que se de cuenta. Y BORRA ESTO`
       toggled[0][1] = true
     }
   }
@@ -41,8 +44,8 @@ root.mainloop()
 
 <div style="border: solid 15px #ffffff; border-radius: 10px; padding:20; margin:20px; width: auto;">
 <center style="color: #ffffff;font-size:25px;"><h1>Coding answers</h1>
-  <button class="button button1" type="button" onclick="task1toggle()">Task 1 gui</button>
-  <pre id="gui1" style="font-family: Arial, Helvetica, sans-serif; border: solid 5px #ffffff; border-radius: 10px; margin:20px; padding: 20px; width:fit-content"></pre>
+  <button class="button button1" type="button" onclick="toggle('gui1', 0)">Task 1 gui</button>
+  <pre id="gui1" style="font-family: Arial, Helvetica, sans-serif;font-size: auto;border: solid 5px #ffffff; border-radius: 10px; margin:20px; padding: 20px; width:auto; visibility: hidden;"></pre>
 </center>
 </div>
 </body>
