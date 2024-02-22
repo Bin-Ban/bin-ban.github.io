@@ -16,7 +16,7 @@
     flex: 50%;
     padding: 10px;
     text-align: center;
-    font-size:30px /* Should be removed. Only for demonstration */
+    font-size:200% /* Should be removed. Only for demonstration */
   }
     body {
       margin: 0;
